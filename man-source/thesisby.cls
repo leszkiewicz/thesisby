@@ -51,6 +51,7 @@
 %%   table
 %%   thebibliography
 %%   mybibliography
+%%   myabstractbibliography
 %%   theindex
 %%
 %% Commands
@@ -95,9 +96,9 @@ LaTeX document class for thesis]
  \LTcapwidth=17cm
   \def\LT@makecaption#1#2#3{%
   \LT@mcol\LT@cols c{\hbox to\z@{\hss\parbox[t]\LTcapwidth{%
-    \sbox\@tempboxa{#1{#2 -- }#3}%
+    \sbox\@tempboxa{#1{#2. -- }#3}%
     \ifdim\wd\@tempboxa>\hsize
-      #1{#2 -- }#3%
+      #1{#2. -- }#3%
     \else
       \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
     \fi
@@ -629,22 +630,6 @@ LaTeX document class for thesis]
      \chapter*{\contentsname}%
      \@starttoc{toc}%
      }
-\newcommand*\l@chapter[2]{%
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \vskip 1.0em \@plus\p@
-    \setlength\@tempdima{2.3em}%
-    \begingroup
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
-      \leavevmode \bfseries
-      \advance\leftskip\@tempdima
-      \hskip -\leftskip
-      \normalfont #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
-      \penalty\@highpenalty
-    \endgroup
-  \fi}
-
 
 \newlength{\l@sectionnumwidth}
 \setlength{\l@sectionnumwidth}{2.3em}
@@ -653,6 +638,7 @@ LaTeX document class for thesis]
 \newlength{\l@subsubsectionnumwidth}
 \setlength{\l@subsubsectionnumwidth}{4.1em}
 
+\newcommand*\l@chapter{\hskip 0pt \@dottedtocline{1}{0.0em}{0em}}
 \newcommand*\l@section{\@dottedtocline{1}{0.5em}{\l@sectionnumwidth}}
 \newcommand*\l@subsection{\@dottedtocline{2}{1em}{\l@subsectionnumwidth}}
 \newcommand*\l@subsubsection{\@dottedtocline{3}{1.5em}{\l@subsubsectionnumwidth}}
@@ -700,7 +686,7 @@ LaTeX document class for thesis]
       \endlist}
 \newenvironment{mybibliography}[1]
      {\section*{\mybibname}%
-     \addcontentsline{toc}{section}{\mybibname}%
+     %\addcontentsline{toc}{section}{\mybibname}%
      \list{\@biblabel{\@arabic\c@enumiv--A}\hfill}%
            {\settowidth\labelwidth{\@biblabel{#1--A.}}%
 		\setlength\labelsep{0em}
@@ -725,6 +711,35 @@ LaTeX document class for thesis]
        {\@latex@warning{Empty `mybibliography' environment}}%
 	\setlength\labelsep{0.5em}
       \endlist}
+
+\newenvironment{myabstractbibliography}[1]
+     {\vspace{10pt}\textbf{\mybibname}%
+     %\addcontentsline{toc}{section}{\mybibname}%
+     \list{\@biblabel{\@arabic\c@enumiv}\hfill}%
+           {\settowidth\labelwidth{\@biblabel{#1.}}%
+		\setlength\labelsep{0em}
+		\leftmargin = 0mm
+		\itemindent = \leftmargin
+		\advance\itemindent\parindent
+		\advance\itemindent\labelwidth
+		\advance\itemindent\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}
+		\renewcommand\bibitem[1]{\item\hyp@def{##1}\if@filesw \immediate\write\@auxout
+	       {\string\bibcite{##1}{\@arabic\c@enumiv}}\fi\ignorespaces}%
+	    }%end of the second argument of the \list
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}%
+     {\def\@noitemerr
+       {\@latex@warning{Empty `mybibliography' environment}}%
+	\setlength\labelsep{0.5em}
+      \endlist}
+
 \newcommand\newblock{\hskip .11em\@plus.33em\@minus.07em}
 \let\@openbib@code\@empty
 \newenvironment{theindex}
