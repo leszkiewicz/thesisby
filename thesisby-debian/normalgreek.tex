@@ -1,0 +1,38 @@
+%%https://dxdy.ru/post985777.html#p985777
+
+%% Определяем свой шрифт "greek"
+\DeclareSymbolFont{greek}{U}{eur}{m}{n}
+\SetSymbolFont{greek}{bold}{U}{eur}{b}{n}
+\DeclareSymbolFontAlphabet{\gr}{greek}
+
+%% Определяем буквы
+\DeclareMathSymbol{\alpha}{\mathord}{greek}{"0B}
+\DeclareMathSymbol{\beta}{\mathord}{greek}{"0C}
+\DeclareMathSymbol{\gamma}{\mathord}{greek}{"0D}
+\DeclareMathSymbol{\delta}{\mathord}{greek}{"0E}
+\DeclareMathSymbol{\epsilon}{\mathord}{greek}{"0F}
+\DeclareMathSymbol{\zeta}{\mathord}{greek}{"10}
+\DeclareMathSymbol{\eta}{\mathord}{greek}{"11}
+\DeclareMathSymbol{\theta}{\mathord}{greek}{"12}
+\DeclareMathSymbol{\iota}{\mathord}{greek}{"13}
+\DeclareMathSymbol{\kappa}{\mathord}{greek}{"14}
+\DeclareMathSymbol{\lambda}{\mathord}{greek}{"15}
+\DeclareMathSymbol{\mu}{\mathord}{greek}{"16}
+\DeclareMathSymbol{\nu}{\mathord}{greek}{"17}
+\DeclareMathSymbol{\xi}{\mathord}{greek}{"18}
+\DeclareMathSymbol{\pi}{\mathord}{greek}{"19}
+\DeclareMathSymbol{\rho}{\mathord}{greek}{"1A}
+\DeclareMathSymbol{\sigma}{\mathord}{greek}{"1B}
+\DeclareMathSymbol{\tau}{\mathord}{greek}{"1C}
+\DeclareMathSymbol{\upsilon}{\mathord}{greek}{"1D}
+\DeclareMathSymbol{\phi}{\mathord}{greek}{"1E}
+\DeclareMathSymbol{\chi}{\mathord}{greek}{"1F}
+\DeclareMathSymbol{\psi}{\mathord}{greek}{"20}
+\DeclareMathSymbol{\omega}{\mathord}{greek}{"21}
+\DeclareMathSymbol{\varepsilon}{\mathord}{greek}{"22}
+\DeclareMathSymbol{\vartheta}{\mathord}{greek}{"23}
+\DeclareMathSymbol{\varpi}{\mathord}{greek}{"24}
+%% В AMS-овском шрифте  \varrho и \varsigma нет
+\let\varrho\rho
+\let\varsigma\sigma
+\DeclareMathSymbol{\varphi}{\mathord}{greek}{"27}

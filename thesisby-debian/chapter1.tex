@@ -1,0 +1,101 @@
+\chapter{ОБЗОРНАЯ}  \label{chapter1}
+
+
+%%%надпись из [] идёт в содержание, надпись из {} идет заголовком в текст
+\section[Очень очень длинное название первого параграфа]{Очень очень длинное название первого\\параграфа}\label{ch1-1}
+
+Пример ссылки на литературу
+
+@Article: \cite{PhysRevLett.116.167802, Polanyi1916, ermolenko1960}.
+
+@Book: \cite{stallman2015free, trechsel2001}.
+
+@Book: \cite{deriagin1984plenki, Lykov_stf}.
+
+@Conference: \cite{capener2014art, art_krutilin_sorbcia2016}
+
+@Electronic: \cite{bell2011pyamg, pogodaBY, vanovschi2015parallel}
+
+@InCollection: \cite{Kuenzel_et_al_2001, bogoslovcky1966art}
+
+@PhdThesis: \cite{descamps1996, kozlov_ktn}
+
+
+
+@Manual (тут пишем всё что надо в поле Title): \cite{gost15588_2014}
+
+
+
+
+
+\section[Еще один очень очень очень очень очень очень длинный заголовок]{Еще один очень очень очень очень очень очень\\длинный заголовок}\label{ch1-2}
+
+
+
+Пример формулы:
+
+\begin{equation}\label{eq:par_fokina}
+\frac{\partial e}{\partial z} = \frac{\mu}{\xi_{o} \gamma}  E_{t} \frac{\partial^2 e}{\partial x^2},
+\end{equation}
+
+\begin{eqrem}
+$x$ -- пространственная координата, м;\\
+& $z$ -- временн\'{а}я координата, ч;\\
+& $\mu$ -- коэффициент паропроницаемости материала, г/(м$\cdot$ч$\cdot$мм.рт.ст.);\\
+& $\xi_{o}$ -- удельная относительная пароёмкость, г/кг;\\
+& $\gamma$ -- объёмный вес материала, кг/м$^3$;\\
+& $e$ -- упругость водяного пара, мм.рт.ст.;\\
+& $E_{t}$ -- максимальная упругость водяного пара при температуре $t$, мм.рт.ст.
+\end{eqrem}
+
+
+Ещё один пример формулы:
+
+
+\begin{equation}\label{eq:lukianov_t}
+\begin{split}
+\left( c_{o} \rho_{o} + c_{\text{ж}} u_{2} + c_{\text{л}} u_{3} + \chi r_{2} \frac{\beta_{3} u - b_{3}}{t^2} \right) \frac{\partial t}{\partial \tau} = \text{div}  \left[ \lambda (u,t) \nabla t + \rho_{\text{воз}} \frac{k_{\text{г}}(u)}{\mu_{\text{воз}}} c_{p} t \nabla P_{o} \right] + \\
++ r_{1} \cdot \text{div} \left[ \rho_{\text{воз}} \frac{M_{\text{в}}}{M_{\text{воз}}} \left( D_{\text{п}} (u)\nabla \frac{\varphi(u, c^*_{i}) \cdot E(t)}{P_{o}} + \frac{k_{\text{г}}(u)}{\mu_{\text{воз}}} \cdot \frac{\varphi(u, c^*_{i}) \cdot E(t)}{P_{o}} \nabla P_{o}\right) \right] +\\
++ \chi \cdot r_{2} \cdot (1-\alpha_{3} + \beta_{3}/t) \cdot \partial u / \partial \tau;\hspace{4cm}
+\end{split}
+\end{equation}
+
+\begin{equation}\label{eq:lukianov_u}
+\begin{split}
+\frac{\partial u}{\partial \tau} = \text{div} \left[  \rho_{\text{воз}} \frac{M_{\text{в}}}{M_{\text{воз}}} \left( D_{\text{п}} (u)\nabla \frac{\varphi(u, c^*_{i}) \cdot E(t)}{P_{o}} + \frac{k_{\text{г}}(u)}{\mu_{\text{воз}}} \cdot \frac{\varphi(u, c^*_{i}) \cdot E(t)}{P_{o}} \nabla P_{o} \right)   \right] + \\
++ \text{div} \left[ K(u_{2}, t, c^*_{i}, I) \nabla u_{2} + K_{t}(u_{2}, t, c^*_{i}, I) \nabla t + K_{c}(u_{2}, t, I) \nabla c^*_{i} \right],\hspace{1.5cm}
+\end{split}
+\end{equation}
+
+\begin{eqrem}
+$c^*_{i}$ -- концентрация $i$-го компонента моли в поровом растворе;\\
+& $u, u_{2}, u_{3}$ -- влагосодержание, кг/м$^3$, соответственно полное, в жидкой и твёрдой фазах;\\
+& $t$ -- локальная температура,$^{\circ}$C;\\
+& $c_{o}, c_{\text{ж}}, c_{\text{л}}, c_{p}$ -- теплоёмкость, соответственно сухого материала, воды, льда и воздуха, кДж/(кг$\cdot^{\circ}$C);\\
+& $K, K_{t}, K_{c}$ -- соответственно коэффициенты влагопроводности (м$^2$/ч), термовлагопроводности (кг/(м$\cdot$ч$\cdot^{\circ}$C)), солепроводности (кг/(м$\cdot$ч$\cdot$н/л));\\               
+& $D_{\text{п}}$ -- коэффициент диффузии водяного пара, м$^2$/ч;\\
+& $k_{\text{г}}$ -- проницаемость среды по газу, м$^2$;\\
+& $I$ -- напорный градиент;\\
+& $\rho_{o}, \rho_{\text{возд}}$ -- плотность материала и воздуха, кг/м$^3$;\\
+& $P_{o}$ -- давление воздуха, Па;\\
+& $M_{\text{в}}, M_{\text{возд}}$ -- масса киломоля воды и воздуха, кг/кмоль;\\
+& $E$ -- парциальное давление насыщенного водяного пара, Па;\\
+& $\mu_{\text{воз}}$ -- вязкость воздуха, Па$\cdot$c;\\
+& $r_{1}$ -- теплота фазового перехода вода-пар, кДж/кг;\\
+& $r_{2}$ -- теплота фазового перехода вода-лёд, кДж/кг;\\
+& $\alpha_{3}, \beta_{3}, b_{3}$ -- эмпирические коэффициенты.\\
+\end{eqrem}
+
+
+
+
+
+\section*{Выводы и задачи исследований}
+\addcontentsline{toc}{section}{Выводы и задачи исследований}
+
+
+Вот тут можно приклеить те же самые задачи исследований из характеристики работы...
+
+\input{tasks}
+
+Либо сформулировать их другими словами...

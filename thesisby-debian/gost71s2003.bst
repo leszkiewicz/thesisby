@@ -1,11 +1,12 @@
 %%
-%% This is file `gost71u2003.bst',
-%% modified from `gost780u.bst' (author: Maksym Polyakov).
+%% This is file `gost71s2003.bst',
+%% modified from `gost780s.bst' (author: Maksym Polyakov)
+%% and `gost71s2003.bst'(author: Vadzim Piatrou).
 %%
-%% 
-%% Copyright 2009-2012 Vadzim Piatrou.
+%%
+%% Copyright 2011-2012 Denis Kazakevich.
 %% Version 0.6
-%% 
+%%
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.2
 %% of this license or (at your option) any later version.
@@ -13,11 +14,11 @@
 %%   http://www.latex-project.org/lppl.txt
 %% and version 1.2 or later is part of all distributions of LaTeX
 %% version 1999/12/01 or later.
-%% 
+%%
 %% Please, send bug reports via e-mail:
-%%   thesisby@tut.by 
-%% 
-%% 
+%%   thesisby@tut.by
+%%
+%%
 %%
 %% This bibliography style attempts
 %% to format bibliography according to
@@ -285,7 +286,9 @@ FUNCTION {bbl.edby}    %  { "\bbledby{}" }
     { curlanguage "ukrainian" =
         {"{\cyr\CYRP\cyrii\cyrd\ \cyrr\cyre\cyrd.\ }"}
         { curlanguage "russian" =
-           {"{\cyr\CYRP\cyro\cyrd\ \cyrr\cyre\cyrd.\ }"}
+%%by vv           {"{\cyr\CYRP\cyro\cyrd\ \cyrr\cyre\cyrd.\ }"}
+			{"{\cyr\cyrp\cyro\cyrd\ \cyrr\cyre\cyrd.\ }"}
+%%
            {"language is not defined: " language  "edited by" * * warning$ "edited by"}
          if$}
       if$}
@@ -452,13 +455,32 @@ FUNCTION {bbl.iin}  %     { "\bblIn{}" }
 
 FUNCTION {bbl.pages}    % { "\bblpp." }
 {  curlanguage "english" =
-    {"pp."}
+%%vv    {"pp."}
+    {"p."}
+%%-vv
     { curlanguage "ukrainian" = curlanguage "russian" = or
            {"{\cyr\cyrs.}"}
-           {"language is not defined: " language  "pp." * * warning$ "pp."}
+%%vv           {"language is not defined: " language  "pp." * * warning$ "pp."}
+           {"language is not defined: " language  "p." * * warning$ "p."}
+%%-vv
       if$}
   if$
 }
+
+
+%%vv
+
+FUNCTION {bbl.sheets}    
+{  curlanguage "english" =
+    {"p."}
+    { curlanguage "ukrainian" = curlanguage "russian" = or
+           {"{\cyr\cyrl.}"}
+           {"language is not defined: " language  "p." * * warning$ "p."}
+      if$}
+  if$
+}
+
+%%-vv
 
 FUNCTION {bbl.page}   %   { "\bblp."
 {  curlanguage "english" =
@@ -511,7 +533,7 @@ FUNCTION {format.names.rev}
   numnames 'namesleft :=
     { namesleft #0 > }
     { s nameptr
-      "{f.~}{vv~}{ll}{, jj}"
+      "{f.}~{vv~}{ll}{, jj}"
       format.name$ 't :=
       nameptr #1 >
         {
@@ -770,6 +792,7 @@ FUNCTION {multi.page.check}
     }
     { t #1 #1 substring$
       duplicate$ "-" =
+
       swap$ duplicate$ "," =
       swap$ "+" =
       or or
@@ -801,6 +824,19 @@ FUNCTION {format.pages.page}
     { format.pages}
   if$
 }
+
+
+%%vv
+FUNCTION {format.sheets.sheet}
+{ pages empty$
+    { numpages empty$
+      { "" }
+      { numpages bbl.sheets tie.connect }
+    if$}
+    { format.pages}
+  if$
+}
+%%-vv
 
 FUNCTION {format.vol.num.pages}
 { volume field.or.null
@@ -933,6 +969,30 @@ FUNCTION {editor.organization.after}
   if$
 }
 
+%%vv
+FUNCTION {organization.editor.after}
+{
+  compiler empty$
+    {}
+    { format.compiler.after  output
+    new.semicolumn
+    }
+  if$
+    organization empty$
+    {}
+    {organization output
+    new.semicolumn
+    }
+  if$
+  editor empty$
+    {}
+    { format.editors.after  output
+    new.semicolumn
+    }
+  if$
+}
+%%-vv
+
 FUNCTION {format.url}
 { url empty$
     { "" }
@@ -1057,9 +1117,14 @@ FUNCTION {incollection}
   new.dblslash
   booktitle "booktitle" output.check
   new.slash
-  editor.organization.after
+%%vv  editor.organization.after
+  organization.editor.after
+%%-vv
   new.block
-  output.address.publisher.date
+%%vv  output.address.publisher.date
+  address output.nonnull
+  format.date "year" output.check
+%%-vv
   new.block
   format.bvolume output
   format.number.series output
@@ -1083,21 +1148,26 @@ FUNCTION {inproceedings}
   new.dblslash
   booktitle "booktitle" output.check
   new.slash
-  editor.organization.after
+%%vv  editor.organization.after
+  organization.editor.after
+%%-vv
   new.block
   format.bvolume output
   format.number.series output
   new.block
-  address empty$
-    { publisher output
-      format.date "year" output.check
-    }
-    { address output.nonnull
-      new.column
-      publisher output
-      format.date "year" output.check
-    }
-  if$
+%%vv  address empty$
+%%    { publisher output
+%%      format.date "year" output.check
+%%    }
+%%    { address output.nonnull
+%%      new.column
+%%      publisher output
+%%      format.date "year" output.check
+%%    }
+%%  if$
+  address output.nonnull
+  format.date "year" output.check
+%%-vv
   new.block
   format.pages.page output
   new.block
@@ -1192,6 +1262,32 @@ FUNCTION {phdthesis}
   new.column
   bbl.phdthesis format.thesis.type output.nonnull
   new.slash
+%%vv  school "school" output.check
+  author.after
+%%-vv  
+  new.block
+  output.address.publisher.date
+  new.block
+%%vv  format.pages.page output
+  format.sheets.sheet output
+%%-vv
+  note output
+  new.sentence
+  format.url output
+  format.annote output
+  fin.entry
+}
+
+%%vv
+FUNCTION {other} % for abstract of phd thesis
+{ output.bibitem
+  format.authors "author" output.check
+  new.sentence
+  format.btitle "title" output.check
+  new.column
+  bbl.phdthesis format.thesis.type output.nonnull
+  new.slash
+  author.after
   school "school" output.check
   new.block
   output.address.publisher.date
@@ -1203,6 +1299,7 @@ FUNCTION {phdthesis}
   format.annote output
   fin.entry
 }
+%%-vv
 
 FUNCTION {proceedings}
 { output.bibitem
@@ -1235,6 +1332,7 @@ FUNCTION {techreport}
   author.before
   new.sentence
   format.title "title" output.check
+
   new.column
   format.tr.number output.nonnull
   new.slash
@@ -1338,6 +1436,123 @@ MACRO {tcs} {"Theoretical Computer Science"}
 READ
 
 
+FUNCTION {sortify}
+{ purify$
+  "l" change.case$
+}
+
+INTEGERS { len }
+
+FUNCTION {chop.word}
+{ 's :=
+  'len :=
+  s #1 len substring$ =
+    { s len #1 + global.max$ substring$ }
+    's
+  if$
+}
+
+FUNCTION {sort.format.names}
+{ 's :=
+  #1 'nameptr :=
+  ""
+  s num.names$ 'numnames :=
+  numnames 'namesleft :=
+    { namesleft #0 > }
+    { nameptr #1 >
+        { "   " * }
+        'skip$
+      if$
+      s nameptr
+      "{vv{ } }{ll{ }}{  f{ }}{  jj{ }}"
+      format.name$ 't :=
+      nameptr numnames = t "others" = and
+        { "et al" * }
+        { t sortify * }
+      if$
+      nameptr #1 + 'nameptr :=
+      namesleft #1 - 'namesleft :=
+    }
+  while$
+}
+
+FUNCTION {sort.format.title}
+{ 't :=
+  "A " #2
+    "An " #3
+      "The " #4 t chop.word
+    chop.word
+  chop.word
+  sortify
+  #1 global.max$ substring$
+}
+
+FUNCTION {author.sort}
+{ author empty$
+    { key empty$
+        { "to sort, need author or key in " cite$ * warning$
+          ""
+        }
+        { key sortify }
+      if$
+    }
+    {
+      author num.names$ #4 <
+        {author sort.format.names }
+        {title sort.format.title}
+      if$
+    }
+  if$
+}
+
+FUNCTION {author.title.sort}
+{ author empty$
+    { title empty$
+        { key empty$
+            { "to sort, need author, title, or key in " cite$ * warning$
+              ""
+            }
+            { key sortify }
+          if$
+        }
+        { title sort.format.title }
+      if$
+    }
+    {
+      author num.names$ #4 <
+        {author sort.format.names }
+        {title sort.format.title}
+      if$
+     }
+  if$
+}
+
+FUNCTION {presort}
+{
+  language "russian" =
+    {"!"}
+    {""}
+  if$
+  author.title.sort
+  *
+  "   "
+  *
+  year field.or.null sortify
+  *
+  "   "
+  *
+  title field.or.null
+  sort.format.title
+  *
+  #1 entry.max$ substring$
+  'sort.key$ :=
+}
+
+
+ITERATE {presort}
+
+SORT
+
 STRINGS { longest.label }
 
 INTEGERS { number.label longest.label.width }
@@ -1392,4 +1607,4 @@ FUNCTION {end.bib}
 EXECUTE {end.bib}
 
 %%
-%% End of file `gost71u2003.bst'.
+%% End of file `gost71s2003.bst'.

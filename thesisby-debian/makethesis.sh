@@ -1,13 +1,13 @@
 #!/bin/bash
 
 echo '************* pdflatex THESIS.tex ********************'
-pdflatex man-thesisby.tex
+pdflatex THESIS.tex
 
 echo '************* pybtex THESIS.aux ********************'
-pybtex man-thesisby.aux
+pybtex THESIS.aux
 
 echo '************* pdflatex THESIS.tex ********************'
-pdflatex man-thesisby.tex
+pdflatex THESIS.tex
 
 echo '************* pdflatex THESIS.tex ********************'
-pdflatex man-thesisby.tex
+pdflatex THESIS.tex

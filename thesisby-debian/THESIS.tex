@@ -1,0 +1,195 @@
+\documentclass{thesisby}
+
+%%%кодировка...
+\usepackage[utf8]{inputenc}
+\usepackage[T1,T2A]{fontenc}
+
+\usepackage[english, russian]{babel}
+
+%%%для борьбы с переполнениями за счет разреженных слов в абзаце
+\emergencystretch=25pt
+
+\usepackage{amsmath,amssymb,amsfonts}
+
+\usepackage{longtable,array, multirow}
+
+\usepackage{graphicx,epsfig}
+
+%%%для чернового режима работы%%%
+%%%раскоментить при создании электронной версии с гиперссылками
+%\usepackage[unicode,colorlinks,pagebackref]{hyperref}
+%\usepackage[unicode]{hyperref}
+%\usepackage{refcheck}% checks lost and useless labels, shows `keys' of \label in the margins
+%%%для времени сборки на титульном черновика
+\usepackage{datetime}
+%%%чтобы зачеркивать слова
+\usepackage{ulem}
+% в тексте, чтобы вычеркнуть слово
+%\sout{Неправильно.} Правильно.
+
+%%%конец___для чернового режима работы%%%
+
+\usepackage{textcomp}% For Celsium sign only \textcelsius
+
+%%%картинки eps тут:
+\graphicspath{{fig/}}
+
+%%%интервал строк
+\usepackage{setspace}
+% одинарный интервал
+\singlespacing
+% полуторный интервал
+%\onehalfspacing
+% двойной интервал
+%\doublespacing
+% произвольный интервал
+%\setstretch{line_spacing_value}
+%Для блока с текстом, например, можно сжать часть текста по вертикали
+%\begin{singlespacing}
+%...
+%\end{singlespacing}
+%или
+%\begin{spacing}{1.0}
+%...
+%\end{spacing}
+
+
+
+
+
+%%%как сделать в латехе чтобы он писал [1-10]? 
+%\usepackage{cite}  % \cite{Petrov, Sidorov...}
+
+
+%%% will be using font like `Times New Roman'
+\usepackage{pscyr}
+\renewcommand{\rmdefault}{ftm}
+
+%%%current file is THESIS?
+%%%YES - isthesis=1
+%%%NO - isthesis=0
+\usepackage{ifthen}
+\newcounter{isthesis}
+\setcounter{isthesis}{1}
+
+%%%для подсчета общего количества страниц в общую характеристику
+%\usepackage{lastpage}
+
+
+
+\title{thesis}
+\author{Vincent Vega}
+\date{\currenttime}
+
+
+
+
+%%%для поворота страницы альбомом
+\usepackage{lscape}
+
+
+%%%заполнения точками всех уровней содержания/огравления
+\makeatletter
+\renewcommand*\l@chapter{\hskip 0pt \@dottedtocline{1}{0.0em}{0em}}
+%\renewcommand*\l@chapter{\hskip 0pt \vspace{10pt} \@dottedtocline{1}{0.0em}{2.3em}}
+%\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
+%\renewcommand*\l@chapter{\@dottedtocline{1}{1.5em}{2.3em}}
+%\renewcommand*\l@chapter{\hskip 0pt \vspace{-20pt} \@dottedtocline{1}{1.5em}{2.3em}}
+%\renewcommand*\l@chapter{\hskip -50pt \hspace{-120pt} \@dottedtocline{1}{1.5em}{2.3em}}
+\makeatother
+
+
+%%%убрать переносы в словах:
+\hyphenation{НИИСФ БНТУ МГСУ НИПТИС РААСН БелНИИС}
+
+%%%для дополнительных символов/используется в подписям к рис гл1
+%\usepackage{fdsymbol}
+\usepackage{MnSymbol}
+%\usepackage{mathabx}
+
+%%%для отключения переноса section в приложениях в содержание
+%http://mydebianblog.blogspot.com/2011/05/latex.html
+%Уровень подробности останется тем же до следующей команды \settocdepth. Например, в Appendix я не хочу отображать подразделы вовсе:   \settocdepth{chapter}
+\usepackage{tocvsec2}
+
+
+%%%последовательно переносы в строках до 1000000. default 10000
+%\doublehyphendemerits=10000
+%Замечу, что пробел между словами "резиновое расстояние" (растягивается и сжимается). Пакет microtype помогает оптимизации. Просто загрузите -- и все
+\usepackage{microtype}
+
+
+%%%для греческий букв прямого начертания
+\input{normalgreek}
+%\input{normalgreek2}
+
+
+
+\begin{document}
+
+
+
+%%%раскоментить при создании электронной версии с гиперссылками
+%это отображается в свойствах файла pdf при включенном {hyperref} (см в этом файле выше)
+%\hypersetup{
+%pdftitle = {Изучение возможностей использования каши в голове в качестве пищи для ума},
+%pdfauthor = {Вега Винсент Траволтович},
+%pdfsubject = {Диссертация на соискание ученой степени кандидата технических наук},
+%pdfkeywords = {фильм, винсент, тарантино, уоллес, роль, сцена, джулс, бутч, мия, сценарий}
+%}% End of hypersetup
+
+
+
+
+
+
+%ТИТУЛЬНЫЙ ЛИСТ
+\include{titlepage}
+
+
+%ОГЛАВЛЕНИЕ
+\tableofcontents
+
+%ПЕРЕЧЕНЬ УСЛОВНЫХ ОБОЗНАЧЕНИЙ
+\include{listOfSymbols}
+
+%ВВЕДЕНИЕ
+\include{thesisintro}
+
+%ОБЩАЯ ХАРАКТЕРИСТИКА РАБОТЫ
+\include{characteristics}
+
+%ОСНОВНАЯ ЧАСТЬ:
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+\include{chapter4}
+\include{chapter5}
+
+
+
+%ЗАКЛЮЧЕНИЕ
+%\input{conclusions}
+\include{conclusions}
+
+
+%БИБЛИОГРАФИЧЕСКИЙ СПИСОК
+\chapter*{БИБЛИОГРАФИЧЕСКИЙ СПИСОК}
+\addcontentsline{toc}{chapter}{БИБЛИОГРАФИЧЕСКИЙ СПИСОК}
+
+%Библиография соискателя
+%\include{mybib}
+\input{mybib}
+
+\bibliographystyle{gost71s2003}
+\bibliography{bibliography}
+
+
+%ПРИЛОЖЕНИЯ
+\appendix
+\include{appendix}
+
+
+\end{document}
+
+
